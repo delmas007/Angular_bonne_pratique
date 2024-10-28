@@ -6,8 +6,8 @@ import {Observable, throwError} from 'rxjs';
 import {Router} from '@angular/router';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
-  const token: string | null = Inject(LocalStorageService).getToken();
   const local = Inject(LocalStorageService);
+  const token: string | null = local.getTokenn();
   const router = Inject(Router);
   if (token){
     req = req.clone({

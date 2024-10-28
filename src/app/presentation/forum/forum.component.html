@@ -1,1 +1,26 @@
-<p>forum works!</p>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <form [formGroup]="form" class="w-50" (ngSubmit)="saveData()">
+    <div class="mb-3">
+      <label class="form-label">Nom du forum</label>
+      <input type="text" formControlName="name" class="form-control" placeholder="forum"
+             [class.is-invalid]="isInvalidateInput(form.controls['name'])">
+      <small class="text-danger" *ngIf="isInvalidateInput(form.controls['name'])">
+        name is required
+      </small>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description du forum</label>
+      <textarea class="form-control" formControlName="description"
+                [class.is-invalid]="isInvalidateInput(form.controls['description'])" rows="3"></textarea>
+      <small class="text-danger" *ngIf="isInvalidateInput(form.controls['name'])">
+        <ng-container *ngIf="form.controls['description'].hasError('required')">
+          ce champ est requis
+        </ng-container>
+        <ng-container *ngIf="form.controls['description'].hasError('minlength')">
+          le champ doit contenir au minimum 5 caracteres
+        </ng-container>
+      </small>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </form>
+</div>
